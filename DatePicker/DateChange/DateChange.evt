@@ -1,0 +1,3 @@
+<aura:event type="COMPONENT" description="Despatched when the date is changed in the DatePicker component" >
+  <aura:attribute name="value" type="String" description="string value of the selected date" access="global" />
+</aura:event>
