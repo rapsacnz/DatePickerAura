@@ -10,3 +10,6 @@ I used some of the structure of the existing Aura lightning component <a href="h
 I also used some data structures and ideas from <a href="https://github.com/joshsalverda/datepickr" target="_blank">here</a>.
 Finally I was forced to use moment.js despite trying not to have any external dependencies, but due to a bug in the Lightning framework - (the $A.localizationService.parseDateTime() method seems to be blocked by the Locker Service), I was forced to use it for string to date conversions. 
 Get moment <a href="http://momentjs.com/downloads/moment.js" target="_blank">here</a>.
+
+Here's what it looks like: 
+http://g.recordit.co/ZF2s3VDhGP.gif
