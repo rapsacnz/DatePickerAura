@@ -49,12 +49,8 @@ Of course, a gif too:
 
 Let me know if you find any bugs.
 
-I know you are supposed to put code in here, but there is simply too much for that to make sense this time.
-
 
   [1]: http://www.soliantconsulting.com/blog/2016/08/build-lightning-date-picker
   [2]: https://github.com/rapsacnz/DatePicker
   [3]: http://i.stack.imgur.com/7roHD.gif
 
-Here's what it looks like: 
-http://g.recordit.co/ZF2s3VDhGP.gif
