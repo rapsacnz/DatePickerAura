@@ -63,6 +63,22 @@ Place the `Datepicker` in the `DatepickerWrapper` component like this (assuming 
     <div class="slds-form-element slds-m-top--medium">
       <c:DatePicker aura:id="closeDate" label="Close Date" placeholder="Enter a Date" value="{!v.opportunity.CloseDate}" formatSpecifier="MM/dd/yyyy" />
     </div>
+    
+Instantiate the picker like this:
+
+    $Lightning.use("c:DatePickerApp", function() {
+        $Lightning.createComponent(
+            "c:DatePickerWrapper",
+            {value : {!Opportunity.CloseDate, 
+             callback: function(){
+                         alert('callback');
+                       }
+            },
+            "lightning",
+            function(cmp) {});
+    });
+    
+Note the callback above - it's an attribute that will be called by the `DatePickerWrapper` class.
 
 Finally, in your `DatepickerWrapper` controller or helper update your date by calling the callback on the vf page:
 
