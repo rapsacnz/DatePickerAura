@@ -41,9 +41,41 @@ Finally, in your controller or helper update your date:
         opp.CloseDate = event.getParam("value");
       }
     }
+    
+**How to use in a VF page - (once the component is built):**
+
+You will want a structure like this:
+
+    VF Page (instantiate and add callback)
+           DatepickerWrapper (handle date change events, call callback)
+                             Datepicker (perform date display and selection)
 
 
-Of course, a gif too:
+
+In your `DatepickerWrapper` component, handle the `dateChangeEvent` from the `Datepicker` and add a callback attribute (for lightning out):
+   
+    <aura:handler name="dateChangeEvent" event="c:DateChange" action="{!c.handleDateChange}" />
+    <aura:attribute name="callback" type="String" description="Call this to communicate results to visualforce page" access="global"/>
+
+
+Place the `Datepicker` in the `DatepickerWrapper` component like this (assuming you are using slds) (you may want to do all form element stuff in the parent vf page - up to you):
+
+    <div class="slds-form-element slds-m-top--medium">
+      <c:DatePicker aura:id="closeDate" label="Close Date" placeholder="Enter a Date" value="{!v.opportunity.CloseDate}" formatSpecifier="MM/dd/yyyy" />
+    </div>
+
+Finally, in your `DatepickerWrapper` controller or helper update your date by calling the callback on the vf page:
+
+    handleDateChange: function(cmp, event, helper) {
+        var func = cmp.get('v.callback');
+        if (func){
+          func({fieldName:"CloseDate",value:event.getParam("value")});
+        }
+    }
+
+
+
+This is what it looks like:
 
 [![Datepicker gif][3]][3]
 
