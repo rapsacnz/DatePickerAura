@@ -1,8 +1,3 @@
-# DatePicker
-Salesforce Lightning is fast becoming a great tool for building Modular, extensible and modern UIs on the Salesforce platform.
-There are a lot of pre-built UI controls that you can use to create an interface, but there are a couple of vital missing pieces.
-The first of these is the Lookup component.
-The second is a good, Lightning styled Datepicker component. There is an existing component, but it it not lightning styled and it does not work very well.
 
 # Sources
 To build this component, I used several sources - however, as the result is kind of a mashup, I haven't included an licence information, as the code is all mixed up together. 
