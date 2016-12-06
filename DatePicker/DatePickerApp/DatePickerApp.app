@@ -8,7 +8,7 @@
   <div class="slds">
     <div class="slds-form">
 
-      <c:SPEAR_DatePicker label="Test Date" placeholder="Enter a Date" formatSpecifier="MM/dd/yyyy" />
+      <c:DatePicker label="Test Date" placeholder="Enter a Date" formatSpecifier="MM/dd/yyyy" />
 
     </div>
   </div>
