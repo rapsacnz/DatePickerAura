@@ -77,11 +77,6 @@
     firstDate.setDate(1);
     var initialPos = firstDate.getDay();
     var pos = initialPos + date.getDate() - 1;
-
-    console.log('first date: ' + firstDate);
-    console.log('initial pos: ' + initialPos);
-    console.log('final pos: ' + pos);
-
     return component.find(pos);
   },
 
@@ -94,9 +89,7 @@
     var year = component.get("v.year");
     var date = new Date(year, month, dayOfMonth);
 
-    console.log('dayOfMonth ' + dayOfMonth);
-    var selectedDate = new Date(Date.UTC(year, month, dayOfMonth, 0, 0, 0));
-    console.log('selectedDate ' + selectedDate);
+    var selectedDate = new Date(year, month, dayOfMonth);
 
     var today = new Date();
     var d = new Date();
@@ -185,6 +178,23 @@
     this.generateMonth(component);
   },
 
+
+  clearDate: function(component) {
+
+    // component.set("v.year", '');
+    // component.set("v.month", '');
+    // component.set("v.monthName", '');
+    // component.set("v.date", '');
+    component.set("v.selectedDate", '');
+    component.set("v.value", '');
+
+
+    //finally fire the event to tell parent components we have changed the date:
+    var dateChangeEvent = component.getEvent("dateChangeEvent");
+    dateChangeEvent.setParams({"value" : '' });
+    dateChangeEvent.fire();
+  },
+
   selectDate: function(component, event) {
     var source = event.getSource();
 
@@ -229,6 +239,9 @@
     var dateChangeEvent = component.getEvent("dateChangeEvent");
     dateChangeEvent.setParams({"value" : component.get("v.selectedDate") });
     dateChangeEvent.fire();
+
+    console.log('selected date: ' + component.get("v.selectedDate"));
+
   },
 
   setFocus: function(component) {
@@ -326,4 +339,4 @@
     }
   }
 
-});
+})
