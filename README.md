@@ -3,8 +3,12 @@
 To build this component, I used several sources - however, as the result is kind of a mashup, I haven't included an licence information, as the code is all mixed up together. 
 I used some of the structure of the existing Aura lightning component <a href="https://github.com/forcedotcom/aura/tree/master/aura-components/src/main/components/ui/datePicker" target="_blank">here</a>.
 I also used some data structures and ideas from <a href="https://github.com/joshsalverda/datepickr" target="_blank">here</a>.
-Finally I was forced to use moment.js despite trying not to have any external dependencies, but due to a bug in the Lightning framework - (the $A.localizationService.parseDateTime() method seems to be blocked by the Locker Service), I was forced to use it for string to date conversions. 
+
+**UPDATE** No more moment.js!! - It's uses the built in `$A.LocalizationService` object to do all date related tasks (which behind the scenes uses moment - but hey, I didn't load it!
+
+~~Finally I was forced to use moment.js despite trying not to have any external dependencies, but due to a bug in the Lightning framework - (the $A.localizationService.parseDateTime() method seems to be blocked by the Locker Service), I was forced to use it for string to date conversions. 
 Get moment <a href="http://momentjs.com/downloads/moment.js" target="_blank">here</a>.
+~~
 
 **Here's how to implement it:**
 
