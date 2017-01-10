@@ -1,9 +1,4 @@
-<aura:application >
-
-  <ltng:require styles="{!join(',', 
-    $Resource.SLDS105 + '/assets/styles/salesforce-lightning-design-system-ltng.css', 
-    $Resource.SLDS202 + '/assets/styles/salesforce-lightning-design-system.css'
-    )}" />
+<aura:application  extends="force:slds">
 
   <div class="slds">
     <div class="slds-form">
