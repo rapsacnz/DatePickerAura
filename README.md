@@ -6,7 +6,7 @@ I also used some data structures and ideas from <a href="https://github.com/josh
 
 **UPDATE** No more moment.js!! - It's uses the built in `$A.LocalizationService` object to do all date related tasks (which behind the scenes uses moment - but hey, I didn't load it!
 
-~~Finally I was forced to use moment.js despite trying not to have any external dependencies, but due to a bug in the Lightning framework - (the $A.localizationService.parseDateTime() method seems to be blocked by the Locker Service), I was forced to use it for string to date conversions. ~~
+~~Finally I was forced to use moment.js despite trying not to have any external dependencies, but due to a bug in the Lightning~~ ~~framework - I was forced to use it for string to date conversions.~~
 
 **Here's how to implement it:**
 
