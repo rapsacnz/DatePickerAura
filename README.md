@@ -1,5 +1,6 @@
 
-# Sources
+# DatePicker
+
 To build this component, I used several sources - however, as the result is kind of a mashup, I haven't included an licence information, as the code is all mixed up together. 
 I used some of the structure of the existing Aura lightning component <a href="https://github.com/forcedotcom/aura/tree/master/aura-components/src/main/components/ui/datePicker" target="_blank">here</a>.
 I also used some data structures and ideas from <a href="https://github.com/joshsalverda/datepickr" target="_blank">here</a>.
@@ -99,3 +100,4 @@ Let me know if you find any bugs.
   [2]: https://github.com/rapsacnz/DatePicker
   [3]: http://i.stack.imgur.com/7roHD.gif
 
+##Acknowledgements: Thank you Carl Harmer - my brother for your ideas when implementing this component.
