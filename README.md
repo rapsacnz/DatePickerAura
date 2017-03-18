@@ -100,4 +100,4 @@ Let me know if you find any bugs.
   [2]: https://github.com/rapsacnz/DatePicker
   [3]: http://i.stack.imgur.com/7roHD.gif
 
-##Acknowledgements: Thank you Carl Harmer - my brother for your ideas when implementing this component.
+## Acknowledgements: Thank you Carl Harmer - my brother for your ideas when implementing this component.
