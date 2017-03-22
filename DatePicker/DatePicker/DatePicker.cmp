@@ -34,7 +34,7 @@
   </aura:method>
 
   <div class="slds-form-element ">
-    <label class="{!v.labelClass}" for="closedate">{!v.label}</label>
+    <label class="{!v.labelClass}" for="dateInput">{!v.label}</label>
     <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon--right slds-float--left" style="{! 'width: ' + v.width}" onmouseleave="{!c.onMouseLeaveInput}">
 
       <ui:inputDate aura:id="dateInput" class="slds-input" value="{!v.value}" format="{!v.formatSpecifier}" displayDatePicker="false" updateOn="keyup" focus="{!c.handleInputFocus}" />
