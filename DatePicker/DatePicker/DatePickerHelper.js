@@ -77,6 +77,7 @@
     firstDate.setDate(1);
     var initialPos = firstDate.getDay();
     var pos = initialPos + date.getDate() - 1;
+
     return component.find(pos);
   },
 
@@ -89,6 +90,8 @@
     var year = component.get("v.year");
     var date = new Date(year, month, dayOfMonth);
 
+    console.log('dayOfMonth ' + dayOfMonth);
+    //var selectedDate = new Date(Date.UTC(year, month, dayOfMonth, 0, 0, 0));
     var selectedDate = new Date(year, month, dayOfMonth);
 
     var today = new Date();
@@ -178,23 +181,6 @@
     this.generateMonth(component);
   },
 
-
-  clearDate: function(component) {
-
-    // component.set("v.year", '');
-    // component.set("v.month", '');
-    // component.set("v.monthName", '');
-    // component.set("v.date", '');
-    component.set("v.selectedDate", '');
-    component.set("v.value", '');
-
-
-    //finally fire the event to tell parent components we have changed the date:
-    var dateChangeEvent = component.getEvent("dateChangeEvent");
-    dateChangeEvent.setParams({"value" : '' });
-    dateChangeEvent.fire();
-  },
-
   selectDate: function(component, event) {
     var source = event.getSource();
 
@@ -232,16 +218,19 @@
     } else {
       component.set("v.date", currentDate);
     }
-    component.set("v.selectedDate", component.get("v.year") + "-" + (component.get("v.month") + 1) + "-" + component.get("v.date"));
-    component.set("v.value", component.get("v.year") + "-" + (component.get("v.month") + 1) + "-" + component.get("v.date"));
+    var selectedDate = new Date(component.get("v.year"), component.get("v.month"), component.get("v.date"));
+    var dateStr = component.get("v.year") + "-" + (component.get("v.month") + 1) + "-" + component.get("v.date");
+    component.set("v.selectedDate", selectedDate);
+    component.set("v.value", dateStr );
 
     //finally fire the event to tell parent components we have changed the date:
     var dateChangeEvent = component.getEvent("dateChangeEvent");
-    dateChangeEvent.setParams({"value" : component.get("v.selectedDate") });
+    dateChangeEvent.setParams({"value" : dateStr });
     dateChangeEvent.fire();
 
-    console.log('selected date: ' + component.get("v.selectedDate"));
 
+    console.log('date click change: selectedDate: ' + selectedDate );
+    console.log('date click change: dateStr: ' + dateStr );
   },
 
   setFocus: function(component) {
@@ -296,13 +285,89 @@
   generateYearOptions : function(component,fullDate) {
 
     var years = [];
-    var year = fullDate.getFullYear()-1;
+    var startYear = component.get("v.startYear");
+    var finishYear = component.get("v.finishYear");
+    if (!component.get("v.extendedYearRange") || !startYear || !finishYear || ( startYear >= finishYear)   ){
+      startYear = fullDate.getFullYear()-1;
+      finishYear = startYear + 10
+    }
+    var thisYear = fullDate.getFullYear();
 
-    for (var i = year; i < year + 10; i++) {
+    for (var i = startYear; i <= finishYear; i++) {
       years.push({ "class": "optionClass", label: i, value: i });
     }
-    years[1].selected = true;
-    component.find("yearSelect").set("v.options", years);
+    try {
+      years[thisYear].selected = true;
+    }catch (e){
+      //can't select this year, so don't worry 'bout it
+    }
+    
+    //component.find("yearSelect").set("v.options", years);
+    component.set("v.options",years);
+  },
+
+  handleManualDateChange : function (component){
+    
+    var format = component.get("v.formatSpecifier");
+    var datestr = component.get("v.value");
+    var langLocale = $A.get("$Locale.langLocale");
+
+    var currentDate = this.parseInputDate(component,datestr);
+    this.setDateValues(component, currentDate, currentDate.getDate());
+
+    // Set the first day of week
+    this.updateNameOfWeekDays(component);
+    this.generateYearOptions(component,currentDate);
+
+    var selectedDate = new Date(component.get("v.year"), component.get("v.month"), component.get("v.date"));
+    var dateStr = component.get("v.year") + "-" + (component.get("v.month") + 1) + "-" + component.get("v.date");
+    component.set("v.selectedDate", selectedDate);
+    component.set("v.value", dateStr );
+
+    //finally fire the event to tell parent components we have changed the date:
+    var dateChangeEvent = component.getEvent("dateChangeEvent");
+    dateChangeEvent.setParams({"value" : dateStr });
+    dateChangeEvent.fire();
+
+    console.log('manual change: selectedDate: ' + selectedDate );
+    console.log('manual change: dateStr: ' + dateStr );
+  },
+
+  parseInputDate : function(component,datestr){
+    var parsedDate = $A.localizationService.parseDateTime(datestr, 'MM/DD/YYYY');
+
+    //ok try this format
+    if (parsedDate == null || !this.isDateValid(parsedDate)) {
+      parsedDate = $A.localizationService.parseDateTime(datestr, 'yyyy-MM-dd');
+    }
+
+    //try, try again
+    if (parsedDate == null || !this.isDateValid(parsedDate)) {
+      $A.localizationService.getToday(timezone, function(today) {
+        parsedDate = $A.localizationService.parseDateTime(today, 'yyyy-MM-dd');
+      });
+    }
+    console.log('datestr: ' + datestr);
+    console.log('parsedDate: ' + parsedDate);
+    return parsedDate; 
+  },
+
+  isDateValid: function(date) {
+    if (Object.prototype.toString.call(date) === "[object Date]") {
+      // it is a date
+      if (isNaN(date.getTime())) { // d.valueOf() could also work
+        // date is not valid
+        return false;
+      } 
+      else {
+        // date is valid
+        return true;
+      }
+    } 
+    else {
+      // not a date
+      return false;
+    }
   },
 
 
@@ -339,4 +404,4 @@
     }
   }
 
-})
+});
