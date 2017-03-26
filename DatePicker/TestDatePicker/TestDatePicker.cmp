@@ -1,0 +1,25 @@
+<aura:component controller="TestDatepicker">
+
+  <aura:attribute name="opportunity" type="Opportunity" default="{ 'sobjectType': 'Opportunity',
+                             'Name': 'New Opportunity',
+                             'CloseDate': '09/13/2018'}" />
+
+  <aura:handler name="init" value="{!this}" action="{!c.getRandomOpp}" />
+  <aura:attribute name="callback" type="String" description="Call this to communcate results to parent" access="global" />
+
+  <div class="slds" >
+    <div class="slds-box" style="height: 500px;">
+
+      <form class="slds-form--stacked" autocomplete="off" onsubmit="{!c.handleSubmit}">
+        <div class="slds-grid slds-wrap section slds-p-bottom--xx-large">
+          <div class="slds-col slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2 slds-p-left--small slds-p-right--small  slds-m-top--small">
+            <div class="slds-form-element slds-m-top--medium">
+              <c:SPEAR_DatePicker aura:id="closeDate" label="Close Date" placeholder="Enter a Date" value="{!v.opportunity.CloseDate}" formatSpecifier="MM/dd/yyyy" dateChangeEvent="{!c.handleDateChange}" />
+            </div>
+          </div>
+        </div>
+      </form>
+      </div>
+    </div>
+
+</aura:component>
