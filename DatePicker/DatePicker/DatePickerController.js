@@ -27,6 +27,12 @@
       component.set("v._setFocus", false);
     }
     helper.renderGrid(component);
+
+    //addition caspar 2016-12-14
+    component.set("v.date", currentDate.getDate());
+    if ( !$A.util.isEmpty(datestr)){
+      $A.util.removeClass(component.find('clear-button'), 'slds-hide');
+    }
   },
 
   handleInputFocus: function(component, event) {
@@ -57,6 +63,17 @@
     if (grid) {
       $A.util.addClass(grid, "slds-hide");
     }
+    //show the clear button
+    if ( !$A.util.isEmpty(component.get("v.value"))){
+      $A.util.removeClass(component.find('clear-button'), 'slds-hide');
+    }
+  },
+
+  
+  handleClearDate: function(component, event, helper) {
+    
+    helper.clearDate(component);
+    $A.util.addClass(component.find('clear-button'), 'slds-hide');
   },
 
   goToToday: function(component, event, helper) {
