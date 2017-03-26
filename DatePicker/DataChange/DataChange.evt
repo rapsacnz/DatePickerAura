@@ -1,0 +1,4 @@
+<aura:event type="COMPONENT" description="General change event" >
+  <aura:attribute name="type" default="DATA_CHANGE" type="string" description="can be anything - use this to verify that the data you receiving is what you expect"/>
+  <aura:attribute name="data" default="{}" type="Object" description="Object holding changed data"/>
+</aura:event>
