@@ -38,36 +38,6 @@
 
   },
 
-  handleGridMouseLeave: function(component, event) {
-    var grid = component.find('grid');
-    if (grid) {
-      $A.util.addClass(grid, "slds-transition-hide");
-    }
-
-    var timeout = window.setTimeout(
-      $A.getCallback(function() {
-        if (grid.isValid()) {
-          $A.util.addClass(grid, "slds-hide");
-        }
-      }), 500
-    );
-
-    component.set("v._windowTimeout", timeout);
-
-  },
-
-  handleGridMouseEnter: function(component, event) {
-    var grid = component.find('grid');
-    if (grid) {
-      $A.util.removeClass(grid, 'slds-hide');
-      $A.util.removeClass(grid, 'slds-transition-hide');
-    }
-    var timeout = component.get("v._windowTimeout");
-    if (timeout) {
-      clearTimeout(timeout);
-    }
-  },
-
   handleManualDateChange: function(component, event, helper) {
     helper.handleManualDateChange(component);
   },
@@ -106,5 +76,30 @@
     helper.changeMonth(component, 1);
     return false;
   },
+
+  onMouseLeaveInput: function(component, event, helper) {
+    component.set("v._gridOver", false);
+    window.setTimeout(
+      $A.getCallback(function() {
+        if (component.isValid()) {
+          //if dropdown over, user has hovered over the dropdown, so don't close.
+          if (component.get("v._gridOver")) {
+            return;
+          }
+          var grid = component.find("grid");
+          $A.util.addClass(grid, 'slds-hide');
+        }
+      }), 200
+    );
+  },
+  onMouseLeaveGrid: function(component, event, helper) {
+    component.set("v._gridOver", false);
+    var grid = component.find("grid");
+    $A.util.addClass(grid, 'slds-hide');
+
+  },
+  onMouseEnterGrid: function(component, event, helper) {
+    component.set("v._gridOver", true);
+  }
 
 });
