@@ -333,6 +333,17 @@
     console.log('manual change: dateStr: ' + dateStr );
   },
 
+  clearDate: function(component) {
+
+    component.set("v.selectedDate", '');
+    component.set("v.value", '');
+
+    //finally fire the event to tell parent components we have changed the date:
+    var dateChangeEvent = component.getEvent("dateChangeEvent");
+    dateChangeEvent.setParams({"value" : '' });
+    dateChangeEvent.fire();
+  },
+
   parseInputDate : function(component,datestr){
     var parsedDate = $A.localizationService.parseDateTime(datestr, 'MM/DD/YYYY');
 
