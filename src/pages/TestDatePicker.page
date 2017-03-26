@@ -1,0 +1,17 @@
+<apex:page showHeader="true" sidebar="true">
+
+  <apex:includeLightning />
+  
+  <div id="lightning"/>
+
+  <script>
+      $Lightning.use("c:TestDatePickerApp", function () {
+        $Lightning.createComponent("c:TestDatePicker", 
+           {"callback": function(val){
+             alert("Visualforce Page has recieved this value: " + val);
+           }}, 
+           "lightning", 
+           function (cmp) {});
+      });
+  </script>
+ </apex:page>
