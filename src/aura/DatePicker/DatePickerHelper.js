@@ -312,6 +312,12 @@
     var datestr = component.get("v.value");
     var langLocale = $A.get("$Locale.langLocale");
 
+    //if a person has deliberately cleared the date, respect that.
+    if ($A.util.isEmpty(datestr)){
+      this.clearDate(component);
+      return;
+    }
+
     var currentDate = this.parseInputDate(component,datestr);
     this.setDateValues(component, currentDate, currentDate.getDate());
 
@@ -346,6 +352,7 @@
 
   parseInputDate : function(component,datestr){
     var parsedDate = $A.localizationService.parseDateTime(datestr, 'MM/DD/YYYY');
+    var timezone = $A.get("$Locale.timezone");
 
     //ok try this format
     if (parsedDate == null || !this.isDateValid(parsedDate)) {
