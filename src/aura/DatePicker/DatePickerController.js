@@ -12,8 +12,6 @@
     var format = component.get("v.formatSpecifier");
     var datestr = component.get("v.value");
     var langLocale = $A.get("$Locale.langLocale");
-    var timezone = $A.get("$Locale.timezone");
-
     
     var currentDate = helper.parseInputDate(component,datestr);
     helper.setDateValues(component, currentDate, currentDate.getDate());
