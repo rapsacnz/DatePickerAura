@@ -39,8 +39,8 @@
     <label class="slds-form-element__label" >{!v.label}</label>
     <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon--right " onmouseleave="{!c.onMouseLeaveInput}">
 
-      <ui:inputDate aura:id="dateInput" class="slds-input" value="{!v.value}" format="{!v.formatSpecifier}" 
-        displayDatePicker="false" updateOn="keyup" focus="{!c.handleInputFocus}" change="{!c.handleManualDateChange}" />
+      <c:InputDate aura:id="dateInput" class="slds-input" value="{!v.value}" 
+        format="{!v.formatSpecifier}" dataChangeEvent="{!c.handleManualInput}" onFocus="{!c.handleInputFocus}"/>
 
       <button aura:id="clear-button" onclick="{!c.handleClearDate}" class="slds-input__icon slds-input__icon--right slds-button slds-button--icon slds-hide">
         <lightning:icon iconName="utility:clear" size="x-small" class="slds-button__icon" />
