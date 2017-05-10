@@ -302,8 +302,16 @@
       //can't select this year, so don't worry 'bout it
     }
     
-    //component.find("yearSelect").set("v.options", years);
     component.set("v.options",years);
+  },
+
+  handleManualInput : function (component,event){
+    var params = event.getParam('arguments');
+    if (params) {
+      var date = params.date;
+      component.set("v.value",date);
+      this.handleManualDateChange(component);
+    }
   },
 
   handleManualDateChange : function (component){
