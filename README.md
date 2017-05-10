@@ -1,6 +1,8 @@
 
 # DatePicker
 
+**UPDATE 2017-05-09** I've changed the component to remove `ui:inputDate` - beacuse of localization and other issues introduced by Salesforce. New components needed (and present here) are: `DateTimeLib`, `InputDate`, `Select`.
+
 ## Sources:
 To build this component, I used several sources - however, as the result is kind of a mashup, I haven't included an licence information, as the code is all mixed up together. 
 I used some of the structure of the existing Aura lightning component <a href="https://github.com/forcedotcom/aura/tree/master/aura-components/src/main/components/ui/datePicker" target="_blank">here</a>.
