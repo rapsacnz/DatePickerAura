@@ -46,6 +46,10 @@
     helper.handleManualDateChange(component);
   },
 
+  handleManualInput: function(component, event, helper) {
+    helper.handleManualInput(component,event);
+  },
+
   handleYearChange: function(component, event, helper) {
 
     var newYear = event.getParam("data");
@@ -72,6 +76,9 @@
     
     helper.clearDate(component);
     $A.util.addClass(component.find('clear-button'), 'slds-hide');
+    //event.stopPropagation();
+    event.preventDefault();
+    return false;
   },
 
   goToToday: function(component, event, helper) {
