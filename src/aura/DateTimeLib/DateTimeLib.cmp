@@ -1,0 +1,12 @@
+<aura:component>
+  <aura:method name="getDisplayValue" action="{!c.getDisplayValue}" description="input is string, output is an object with date and time">
+    <aura:attribute name="value" type="String" />
+    <aura:attribute name="config" type="Object" />
+    <aura:attribute name="callback" type="Function" />
+  </aura:method>
+  <aura:method name="getISOValue" action="{!c.getISOValue}" description="input is a date, output is a formatted string">
+    <aura:attribute name="date" type="Date" />
+    <aura:attribute name="config" type="Object" />
+    <aura:attribute name="callback" type="Function" />
+  </aura:method>
+</aura:component>
