@@ -1,0 +1,27 @@
+
+<aura:component access="GLOBAL" extensible="true">
+
+    <aura:attribute name="class" type="String" description="A CSS style to be attached to the component." />
+    <aura:attribute name="placeholder" type="String" description="The hint for the date input format. The placeholder is set during init based on the custom or locale format."/>
+    <aura:attribute name="format" type="String" description="Java style format specifier for the date" />
+    <aura:attribute name="timezone" type="String" description="value for this component" />
+    <aura:attribute name="value" type="String" description="value for this component" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:registerEvent name="dataChangeEvent" type="c:DataChange" description="The event fired when a valid date is set" />
+    <aura:registerEvent name="onFocus" type="c:DataChange" description="The event fired when the user focuses on the component."/>
+
+
+    <div class="form-element">
+        <input type="text"
+               aura:id="inputText"
+               placeholder="{!v.placeholder}"
+               class="{!v.class + ' input'}"
+               onchange="{!c.handleDateChange}"
+               onfocus="{!c.handleFocus}"/>
+
+    </div>
+
+    <c:DateTimeLib aura:id="dateTimeLib"/>
+
+</aura:component>
