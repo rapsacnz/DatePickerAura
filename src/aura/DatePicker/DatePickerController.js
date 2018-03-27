@@ -5,7 +5,9 @@
     for (var i = 0; i < 41; i++) {
       var cellCmp = component.find(i);
       if (cellCmp) {
-        cellCmp.addHandler("dateCellClick", component, "c.handleClick");
+        cellCmp.addEventHandler("dateCellClick", component.getReference("c.handleClick"));
+        //add handler no longer works - use the above.
+        //cellCmp.addHandler("dateCellClick", component, "c.handleClick");
       }
     }
 
