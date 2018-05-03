@@ -306,7 +306,7 @@
   },
 
   handleManualInput : function (component,event){
-    var params = event.getParam('arguments');
+    var params = event.getParam('data');
     if (params) {
       var date = params.date;
       component.set("v.value",date);
