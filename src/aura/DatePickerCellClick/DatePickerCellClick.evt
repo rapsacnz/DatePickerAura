@@ -1,0 +1,1 @@
+<aura:event type="COMPONENT" description="Dispatched when a cell is clicked"/>

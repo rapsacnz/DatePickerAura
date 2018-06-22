@@ -1,17 +1,99 @@
 .THIS thead {
-    background-color: #f0f1f2;
-    border-bottom: 1px solid #f0f1f2;
+  background-color: #f0f1f2;
+  border-bottom: 1px solid #f0f1f2;
 }
 
-.THIS .spear-select {
-  height:2.125rem!important;
+.THIS .datepicker-table th  {
+  padding: .3rem;
+}
+
+.THIS .datepicker-table td {
+  padding: .3rem;
+}
+.THIS.datepicker-display-table {
+  display: table;
+}
+.THIS.datepicker-display-table.slds-hide {
+  display: none;
 }
 
 .THIS.slds-transition-hide {
-    transition: opacity .5s;
+  transition: opacity .5s;
 }
 
 .THIS a.no-focus:focus {
   outline: none !important;
   box-shadow: none;
+}
+
+.THIS .slds-datepicker .datepicker-small th {
+  padding: .3rem!important;
+}
+
+.THIS .slds-scope .slds-datepicker .datepicker-small  td>.slds-day {
+  width: 1.2rem!important;
+  height: 1.2rem!important;
+  min-width: none!important;
+  line-height: 1.5rem!important;
+}
+
+.THIS.clear-user-agent-styles table,
+.THIS.clear-user-agent-styles thead,
+.THIS.clear-user-agent-styles tbody,
+.THIS.clear-user-agent-styles tfoot,
+.THIS.clear-user-agent-styles tr,
+.THIS.clear-user-agent-styles th,
+.THIS.clear-user-agent-styles td {
+  font-weight: inherit;
+}
+
+.THIS .datepicker-table {
+  border-color: rgb(128,128,128);
+  border-collapse: collapse;
+  box-sizing: border-box;
+  font-family: "Salesforce Sans",Arial,sans-serif;
+  height: auto;
+  -webkit-border-horizontal-spacing: 0px;
+  -webkit-border-vertical-spacing: 0px;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.THIS .datepicker-table table {
+  color: rgb(22,50,92);
+  display: table;
+  line-height: 18px;
+  width: 100%;
+}
+
+.THIS .datepicker-table thead tr {
+  border-bottom-color: rgb(240, 241, 242);
+  display: table-row;
+  font-size: 12px;
+  line-height: 18px;
+  vertical-align: middle;
+  width: auto;
+}
+
+.THIS .datepicker-table tbody {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  color: rgb(22, 50, 92);
+  display: table-row-group;
+  line-height: 18px;
+  vertical-align: middle;
+  width: auto;
+}
+
+.THIS .datepicker-table tbody tr {
+  display: table-row;
+}
+
+.THIS .datepicker-table tbody tr td {
+  display: table-cell;
+  line-height: 18px;
+  padding: .25rem;
+  text-align: center;
+  vertical-align: middle;
+  width: auto;
+  border: none;
 }

@@ -7,6 +7,9 @@
   <aura:attribute name="placeholder" type="String" description="" />
   <aura:attribute name="class" type="String" description="A CSS style to be attached to the component." />
   <aura:attribute name="formatSpecifier" type="String" description="Java style format specifier for the date" />
+  <aura:attribute name="compact" type="Boolean" default="false" />
+  <aura:attribute name="showTodayHyperlink" type="Boolean" default="true" />
+
 
   <aura:attribute name="date" type="Integer" description="The currently highlighted date." />
   <aura:attribute name="month" type="Integer" description="The currently rendered month." />
@@ -15,8 +18,7 @@
   <aura:attribute name="selectedDate" type="Date" description="The selected date." />
   <aura:attribute name="setFocus" type="Boolean" default="true" description="Control if we should focus any date when we render the month." />
 
-  <aura:attribute name="extendedYearRange" type="Boolean" default="false" 
-                  description="If true, you must set start and stop year values (1900 and 2100 for eg)" />
+  <aura:attribute name="extendedYearRange" type="Boolean" default="false" description="If true, you must set start and stop year values (1900 and 2100 for eg)" />
   <aura:attribute name="startYear" type="Integer" description="if extendedYearRange is true, this will determine the first year in the list" />
   <aura:attribute name="finishYear" type="Integer" description="if extendedYearRange is true, this will determine the last year in the list" />
   <aura:attribute name="options" type="SelectOption[]" />
@@ -29,20 +31,20 @@
   <aura:attribute name="_gridOver" type="Boolean" default="false" />
 
   <!-- events -->
-  <aura:registerevent name="dateChangeEvent" type="c:DateChange" description="The event fired when a calendar value is selected" />
+  <aura:registerevent name="dateChangeEvent" type="c:ComponentEvent" description="The event fired when a calendar value is selected" />
 
-  <aura:method name="reInit" action="{!c.doInit}" 
-    description="Runs the init method again if an external value has been changed and we need to update the ui"> 
+  <aura:method name="reInit" action="{!c.doInit}" description="Runs the init method again if an external value has been changed and we need to update the ui">
   </aura:method>
 
-  <div class="slds-form-element ">
-    <label class="slds-form-element__label" >{!v.label}</label>
-    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon--right " onmouseleave="{!c.onMouseLeaveInput}">
+  <!-- <aura:handler name="change" value="{!v.year}" action="{!c.handleYearChange}"/> -->
 
-      <c:InputDate aura:id="dateInput" class="slds-input" value="{!v.value}" 
-        format="{!v.formatSpecifier}" dataChangeEvent="{!c.handleManualInput}" onFocus="{!c.handleInputFocus}"/>
+  <div class="slds-form-element " aura:id="dateInputFormElement">
+    <label class="{! empty(v.label) ? 'slds-hide ' : ' slds-form-element__label ' }">{!v.label}</label>
+    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right " aura:id="dateInputControl"  onmouseleave="{!c.onMouseLeaveInput}">
 
-      <button aura:id="clear-button" onclick="{!c.handleClearDate}" class="slds-input__icon slds-input__icon--right slds-button slds-button--icon slds-hide">
+      <c:InputDate aura:id="dateInput" class="slds-input" value="{!v.value}" format="{!v.formatSpecifier}" dataChangeEvent="{!c.handleManualInput}" onFocus="{!c.handleInputFocus}" />
+
+      <button aura:id="clear-button" onclick="{!c.handleClearDate}" class="slds-input__icon slds-input__icon_right slds-button slds-button_icon slds-hide">
         <lightning:icon iconName="utility:clear" size="x-small" class="slds-button__icon" />
         <span class="slds-assistive-text">Clear</span>
       </button>
@@ -50,33 +52,36 @@
     </div>
   </div>
 
-  <div aura:id="grid" id="datepicker-dropdown" class="slds-datepicker slds-dropdown slds-dropdown--left slds-hide" onmouseenter="{!c.onMouseEnterGrid}" onmouseleave="{!c.onMouseLeaveGrid}">
-    
-    <div class="slds-datepicker__filter slds-grid">
-      <div class="slds-datepicker__filter--month slds-grid slds-grid--align-spread slds-grow">
+
+  <div aura:id="grid" id="datepicker-dropdown" class="slds-datepicker slds-dropdown slds-dropdown_left slds-hide datepicker-display-table clear-user-agent-styles "
+       onmouseenter="{!c.onMouseEnterGrid}" onmouseleave="{!c.onMouseLeaveGrid}">
+
+
+    <div class="slds-datepicker__filter slds-grid ">
+      <div class="slds-datepicker__filter_month slds-grid slds-grid_align-spread slds-grow">
         <div class="slds-align-middle">
-          <a onclick="{!c.goToPreviousMonth}" href="javascript:void(0);" class="slds-button slds-button--icon-container no-focus">
-            <lightning:icon iconName="utility:left" size="small" class="slds-button__icon slds-button__icon--small slds-m-top--xx-small no-focus" />
+          <a onclick="{!c.goToPreviousMonth}" href="javascript:void(0);" class="slds-button slds-button_icon-container no-focus">
+            <lightning:icon iconName="utility:left" size="small" class="slds-button__icon slds-button__icon_small slds-m-top_xx-small no-focus" />
           </a>
         </div>
         <h2 id="month" class="slds-align-middle" aria-live="assertive" aria-atomic="true">{!v.monthName}</h2>
         <div class="slds-align-middle">
-          <a onclick="{!c.goToNextMonth}" href="javascript:void(0);" class="slds-button slds-button--icon-container no-focus">
-            <lightning:icon iconName="utility:right" size="small" class="slds-button__icon slds-button__icon--small slds-m-top--xx-small no-focus" />
+          <a onclick="{!c.goToNextMonth}" href="javascript:void(0);" class="slds-button slds-button-icon-container no-focus">
+            <lightning:icon iconName="utility:right" size="small" class="slds-button-icon slds-button-icon_small slds-m-top_xx-small no-focus" />
           </a>
         </div>
       </div>
       <div class="slds-shrink-none">
-        <c:Select aura:id="yearSelect" value="{!v.year}" options="{!v.options}"
-          selectChange="{!c.handleYearChange}" />
+          <c:SimpleSelect aura:id="yearSelect" value="{!v.year}" options="{!v.options}" selectChange="{!c.handleYearChange}" />
       </div>
     </div>
 
-    <table aura:id="maintable" class="datepicker__month" role="grid" aria-labelledby="month">
+    <table aura:id="maintable" class="datepicker__month datepicker-table datepicker-table" role="grid" aria-labelledby="month">
       <thead>
         <tr id="weekdays">
           <aura:iteration items="{!v._namesOfWeekdays}" var="day">
-            <th scope="col" class="dayOfWeek">
+              <!-- style="{#v.compact ? 'padding: .4rem;' : ' padding: 1rem; '}" -->
+            <th scope="col" class="dayOfWeek" >
               <abbr title="{!day.shortName}">{!day.shortName}</abbr>
             </th>
           </aura:iteration>
@@ -84,63 +89,64 @@
       </thead>
       <tbody>
         <tr aura:id="week1">
-          <c:DateCell aura:id="0" />
-          <c:DateCell aura:id="1" />
-          <c:DateCell aura:id="2" />
-          <c:DateCell aura:id="3" />
-          <c:DateCell aura:id="4" />
-          <c:DateCell aura:id="5" />
-          <c:DateCell aura:id="6" />
+          <c:DatePickerCell aura:id="0" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="1" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="2" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="3" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="4" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="5" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="6" compact="{#v.compact}" />
         </tr>
         <tr aura:id="week2">
-          <c:DateCell aura:id="7" />
-          <c:DateCell aura:id="8" />
-          <c:DateCell aura:id="9" />
-          <c:DateCell aura:id="10" />
-          <c:DateCell aura:id="11" />
-          <c:DateCell aura:id="12" />
-          <c:DateCell aura:id="13" />
+          <c:DatePickerCell aura:id="7" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="8" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="9" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="10" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="11" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="12" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="13" compact="{#v.compact}" />
         </tr>
         <tr aura:id="week3">
-          <c:DateCell aura:id="14" />
-          <c:DateCell aura:id="15" />
-          <c:DateCell aura:id="16" />
-          <c:DateCell aura:id="17" />
-          <c:DateCell aura:id="18" />
-          <c:DateCell aura:id="19" />
-          <c:DateCell aura:id="20" />
+          <c:DatePickerCell aura:id="14" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="15" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="16" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="17" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="18" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="19" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="20" compact="{#v.compact}" />
         </tr>
         <tr aura:id="week4">
-          <c:DateCell aura:id="21" />
-          <c:DateCell aura:id="22" />
-          <c:DateCell aura:id="23" />
-          <c:DateCell aura:id="24" />
-          <c:DateCell aura:id="25" />
-          <c:DateCell aura:id="26" />
-          <c:DateCell aura:id="27" />
+          <c:DatePickerCell aura:id="21" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="22" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="23" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="24" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="25" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="26" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="27" compact="{#v.compact}" />
         </tr>
         <tr aura:id="week5">
-          <c:DateCell aura:id="28" />
-          <c:DateCell aura:id="29" />
-          <c:DateCell aura:id="30" />
-          <c:DateCell aura:id="31" />
-          <c:DateCell aura:id="32" />
-          <c:DateCell aura:id="33" />
-          <c:DateCell aura:id="34" />
+          <c:DatePickerCell aura:id="28" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="29" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="30" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="31" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="32" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="33" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="34" compact="{#v.compact}" />
         </tr>
-
         <tr aura:id="week6">
-          <c:DateCell aura:id="35" />
-          <c:DateCell aura:id="36" />
-          <c:DateCell aura:id="37" />
-          <c:DateCell aura:id="38" />
-          <c:DateCell aura:id="39" />
-          <c:DateCell aura:id="40" />
-          <c:DateCell aura:id="41" />
+          <c:DatePickerCell aura:id="35" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="36" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="37" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="38" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="39" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="40" compact="{#v.compact}" />
+          <c:DatePickerCell aura:id="41" compact="{#v.compact}" />
         </tr>
-        <tr>
-          <td colspan="7" role="gridcell"><a onclick="{!c.goToToday}" href="javascript:void(0);" class="slds-show--inline-block slds-p-bottom--x-small">Today</a></td>
-        </tr>
+        <aura:if isTrue="{!v.showTodayHyperlink}">
+          <tr>
+            <td colspan="7" role="gridcell"><a onclick="{!c.goToToday}" href="javascript:void(0);" class="slds-show_inline-block slds-p-bottom_x-small">Today</a></td>
+          </tr>
+        </aura:if>
       </tbody>
     </table>
   </div>

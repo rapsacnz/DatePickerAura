@@ -1,0 +1,24 @@
+<aura:component >
+    <aura:attribute name="ariaSelected" type="String" default="false" description="Highlight this control."/>
+    <aura:attribute name="ariaDisabled" type="String" default="false" description="Disable this control."/>
+    <aura:attribute name="tabIndex" type="Integer" default="-1" description="The tab index of the anchor element."/>
+    <aura:attribute name="value" type="Date" description="The date this component renders."/>
+    <aura:attribute name="label" type="String"/>
+    <aura:attribute name="tdClass" type="String"/>
+    <aura:attribute name="compact" type="Boolean" default="false"/>
+    <aura:attribute name="_smallStyleSpan" type="String" access="private" default=" width: 1.2rem; height: 1.2rem; min-width: 0px; line-height: 1.3rem; "/>
+    <aura:attribute name="_smallStyleTd" type="String" access="private" default=" padding: .2rem; "/>
+
+    <!-- style="{!v.compact ? v._smallStyleTd : ''}"
+    style="{!v.compact ? v._smallStyleSpan : ''}" class="{! v.compact ? ' small-td ' : ' normal-td ' + v.tdClass }"-->
+
+    <aura:registerevent name="dateCellClick" type="c:ComponentEvent" description="click event" />
+
+    <td id="datecell" class="normal-td datepicker-table"  role="gridcell"
+        aria-selected="{!v.ariaSelected}" aria-disabled="{!v.ariaDisabled}" onclick="{!c.handleCellClick}" >
+       <span class="{! v.compact ? ' small-span ' : '' + v.tdClass + ' slds-day ' }"  >{!v.label}</span>
+    </td>
+
+
+
+</aura:component>

@@ -1,9 +1,9 @@
-<aura:component>
+<aura:component >
 
   <aura:attribute name="value" type="String" />
   <aura:attribute name="options" type="SelectOption[]" />
 
-  <aura:registerEvent name="selectChange" type="c:DataChange" />
+  <aura:registerEvent name="selectChange" type="c:ComponentEvent" />
   <aura:handler name="change" value="{!v.value}" action="{!c.init}"/>
   <aura:handler name="change" value="{!v.options}" action="{!c.init}"/>
 

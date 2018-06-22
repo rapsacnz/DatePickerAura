@@ -1,0 +1,13 @@
+div.THIS {
+  position: relative;
+}
+
+.THIS + .display,
+.THIS .display {
+  display: inline-block;
+}
+
+.THIS + .hide,
+.THIS .hide {
+  display: none;
+}

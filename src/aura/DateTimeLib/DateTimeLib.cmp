@@ -1,4 +1,4 @@
-<aura:component>
+<aura:component >
   <aura:method name="getDisplayValue" action="{!c.getDisplayValue}" description="input is string, output is an object with date and time">
     <aura:attribute name="value" type="String" />
     <aura:attribute name="config" type="Object" />
