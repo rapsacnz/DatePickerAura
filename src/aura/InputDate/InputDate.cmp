@@ -18,7 +18,8 @@
                placeholder="{!v.placeholder}"
                class="{!v.class + ' input'}"
                onchange="{!c.handleDateChange}"
-               onfocus="{!c.handleFocus}"/>
+               onfocus="{!c.handleFocus}"
+               onclick="{!c.handleOnClick}"/>
 
     </div>
 

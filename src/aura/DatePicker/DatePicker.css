@@ -3,17 +3,17 @@
   border-bottom: 1px solid #f0f1f2;
 }
 
-.THIS .datepicker-table th  {
+.THIS .netce-table th  {
   padding: .3rem;
 }
 
-.THIS .datepicker-table td {
+.THIS .netce-table td {
   padding: .3rem;
 }
-.THIS.datepicker-display-table {
+.THIS.netce-display-table {
   display: table;
 }
-.THIS.datepicker-display-table.slds-hide {
+.THIS.netce-display-table.slds-hide {
   display: none;
 }
 
@@ -26,16 +26,20 @@
   box-shadow: none;
 }
 
-.THIS .slds-datepicker .datepicker-small th {
+.THIS .slds-datepicker .spear-datepicker-small th {
   padding: .3rem!important;
 }
 
-.THIS .slds-scope .slds-datepicker .datepicker-small  td>.slds-day {
+.THIS .slds-scope .slds-datepicker .spear-datepicker-small  td>.slds-day {
   width: 1.2rem!important;
   height: 1.2rem!important;
   min-width: none!important;
   line-height: 1.5rem!important;
 }
+/*
+.THIS .slds-datepicker .spear-datepicker-small  td {
+  padding: .2rem!important;
+} */
 
 .THIS.clear-user-agent-styles table,
 .THIS.clear-user-agent-styles thead,
@@ -44,7 +48,19 @@
 .THIS.clear-user-agent-styles tr,
 .THIS.clear-user-agent-styles th,
 .THIS.clear-user-agent-styles td {
-  font-weight: inherit;
+    /*display: block;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-collapse: inherit;
+    border-spacing: 0;
+    border-color: inherit;
+    text-align: left;
+
+    -webkit-border-horizontal-spacing: 0;
+    -webkit-border-vertical-spacing: 0;*/font-weight: inherit;
 }
 
 .THIS .datepicker-table {

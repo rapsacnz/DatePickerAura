@@ -1,6 +1,10 @@
 ({
   afterRender: function(component, helper) {
+
+    
+
     return this.superAfterRender();
+
   },
 
   rerender: function(component, helper) {
@@ -21,4 +25,4 @@
   },
 
 
-}) 
+}) // eslint-disable-line semi

@@ -53,7 +53,7 @@
   </div>
 
 
-  <div aura:id="grid" id="datepicker-dropdown" class="slds-datepicker slds-dropdown slds-dropdown_left slds-hide datepicker-display-table clear-user-agent-styles "
+  <div aura:id="grid" id="datepicker-dropdown" class="slds-datepicker slds-dropdown slds-dropdown_left slds-hide netce-display-table clear-user-agent-styles "
        onmouseenter="{!c.onMouseEnterGrid}" onmouseleave="{!c.onMouseLeaveGrid}">
 
 
@@ -76,7 +76,7 @@
       </div>
     </div>
 
-    <table aura:id="maintable" class="datepicker__month datepicker-table datepicker-table" role="grid" aria-labelledby="month">
+    <table aura:id="maintable" class="datepicker__month netce-table datepicker-table" role="grid" aria-labelledby="month">
       <thead>
         <tr id="weekdays">
           <aura:iteration items="{!v._namesOfWeekdays}" var="day">
